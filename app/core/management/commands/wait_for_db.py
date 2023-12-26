@@ -1,4 +1,4 @@
-from typing import Any, Optional
+from typing import Any
 from django.core.management.base import BaseCommand
 import time
 from psycopg2 import OperationalError as Psycopg2Error
@@ -10,9 +10,9 @@ class Command(BaseCommand):
 
         self.stdout.write("Waiting for database")
         db_up = False
-        while db_up == False:
+        while db_up is False:
             try:
-                self.check(databases = ["default"])
+                self.check(databases=["default"])
                 db_up = True
             except (Psycopg2Error, OperationalError):
                 self.stdout.write("Database Unavailable, waiting 1 sec..")
